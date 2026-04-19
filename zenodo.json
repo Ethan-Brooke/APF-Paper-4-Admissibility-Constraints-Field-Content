@@ -1,0 +1,33 @@
+{
+  "title": "APF Paper 4 — Admissibility Constraints and Structural Saturation",
+  "description": "<p>Field content and fermion spectrum of the Standard Model: 45 fermions in three generations, the 1-of-4680 admissible template, mass-ratio structure, Cabibbo angle, CKM matrix structure. Currently PDF-only; .tex source pending.</p><p>This repository is the executable mathematical appendix for Paper 4 of the Admissibility Physics Framework (APF). All theorems trace to named check functions in the bundled <code>apf/</code> package.</p>",
+  "creators": [
+    {
+      "name": "Brooke, Ethan",
+      "affiliation": "Independent Researcher, San Anselmo, California, USA",
+      "orcid": "0009-0001-2261-4682"
+    }
+  ],
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": ["fermion spectrum", "field content", "Standard Model", "generations", "Cabibbo angle", "CKM matrix"],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.18604845",
+      "relation": "isVersionOf",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.18604548",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ],
+  "version": "PDF only (source-pending)"
+}

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apf-paper4"
+version = "PDF only (source-pending)"
+description = "Admissibility Constraints Field Content — executable mathematical appendix"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+  {name = "Ethan Brooke", email = "brooke.ethan@gmail.com"}
+]
+keywords = ["fermion spectrum", "field content", "Standard Model", "generations", "Cabibbo angle", "CKM matrix"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = ["numpy>=1.20", "scipy>=1.7"]
+
+[project.urls]
+Homepage = "https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content"
+"Bug Tracker" = "https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content/issues"
+"Zenodo" = "https://doi.org/10.5281/zenodo.18604845"
+
+[tool.setuptools.packages.find]
+include = ["apf*"]
