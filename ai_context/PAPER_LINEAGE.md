@@ -9,7 +9,7 @@ This file tracks the version history of Paper 4 (Admissibility Constraints and S
 - **Version in this repo:** PDF only (source-pending)
 - **File in this repo:** `Paper_4__PDF only (source-pending).tex` + `.pdf`
 - **Page count:** None pp
-- **Release date:** 2026-04-18
+- **Release date:** 2026-04-19
 - **Codebase version at build:** v6.9 (2026-04-18)
 
 ## Zenodo record
