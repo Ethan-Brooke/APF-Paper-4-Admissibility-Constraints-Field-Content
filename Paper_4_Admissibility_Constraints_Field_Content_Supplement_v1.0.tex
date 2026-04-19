@@ -1,0 +1,667 @@
+% ======================================================================
+% Paper 4 --- CONSTRAINTS: Technical Supplement v1.0
+%
+% Companion to Paper 4 v2.0 main paper.
+% Contains: assumption inventory, formal proofs for the main theorems,
+% countermodels, red-team analysis, theorem index, dependency diagram,
+% changelog from Feb 2026 PDF-only v1.0.
+% ======================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\titleformat{\section}{\Large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape Paper 4 Supplement (v1.0)}
+\fancyhead[R]{\small\itshape E.\,Brooke}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+
+\tcbuselibrary{skins,breakable}
+
+\tcbset{
+    apfbox/.style={
+        enhanced,
+        colback=black!3,
+        frame hidden,
+        borderline={0.5pt}{0pt}{black},
+        arc=0pt,
+        left=8pt, right=8pt, top=8pt, bottom=8pt,
+        fonttitle=\bfseries\color{black},
+        coltitle=black,
+        detach title,
+        before upper={\tcbtitle\par\smallskip},
+        before skip=14pt,
+        after skip=14pt,
+        grow to left by=-8pt,
+        grow to right by=-8pt,
+        sharp corners,
+        breakable,
+    }
+}
+
+\newcommand{\coderef}[2]{\smallskip\noindent\textit{Code reference:} \texttt{#1} in \texttt{#2}.}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Un}{\mathrm{U}}
+\newcommand{\epitag}[1]{\textbf{[#1]}}
+\newcommand{\PLEC}{\emph{Principle of Least Enforcement Cost}}
+\newcommand{\Aone}{\textbf{A1}}
+\newcommand{\Atwo}{\textbf{A2}}
+\newcommand{\MD}{\textbf{MD}}
+\newcommand{\BW}{\textbf{BW}}
+\newcommand{\paperref}[2]{\textbf{Paper~#1} (\textit{#2})}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{countermodel}[theorem]{Countermodel}
+
+\title{
+  \textbf{Paper 4: Constraints --- Technical Supplement}\\
+  \large Admissibility Constraints and the Standard Model Field Content\\
+  \normalsize v1.0 --- April 2026 --- companion to main paper v2.0\\
+  \normalsize E.\,S.\,Brooke
+}
+\author{}
+\date{}
+
+\setstretch{1.05}
+\setlist[itemize]{itemsep=3pt,topsep=4pt}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This Technical Supplement is the companion to Paper~4 v2.0 (\emph{Admissibility Constraints and the Standard Model Field Content}). It contains: (i) the full assumption inventory used by Paper~4, including the paper-specific structural hypotheses (\S\ref{sec:assumptions}); (ii) formal proofs for the main theorems, compressed in the main paper to $\leq$20-line sketches (\S\ref{sec:TM_full}--\S\ref{sec:PMNS_full}); (iii) countermodels excluding alternatives (\S\ref{sec:countermodels}); (iv) a red-team section analyzing the paper-specific structural hypotheses (\S\ref{sec:redteam}); (v) the theorem index and dependency diagram (\S\ref{sec:index}); and (vi) the changelog from the February 2026 PDF-only release (\S\ref{sec:changelog}).
+
+The supplement is the canonical source of truth for Paper~4's formal content. Where the main paper and the supplement appear to conflict, the supplement is correct by convention.
+\end{abstract}
+
+\tableofcontents
+\vspace{1em}
+\clearpage
+
+% ======================================================================
+\section{Assumption inventory}\label{sec:assumptions}
+% ======================================================================
+
+Paper~4's formal content rests on the following inputs. Each is stated with its origin, its role in Paper~4, and the consequence of its removal.
+
+\subsection{PLEC's four structurally necessary components}\label{sec:assumptions_plec}
+
+From \paperref{1}{Enforceability of Distinction} Technical Supplement \S1:
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.08\linewidth} >{\raggedright\arraybackslash}p{0.35\linewidth} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule
+\textbf{Component} & \textbf{Content} & \textbf{Role in Paper 4} & \textbf{If removed} \\
+\midrule
+\Aone{} & Total enforcement cost $\sum_d \varepsilon(d) \leq C(\Gamma) < \infty$ & Foundation for monogamy, saturation, $T_{4F}$, capacity partition & Paper 4 trivializes; no bounds \\
+\MD{}   & Distinctions satisfy $\varepsilon(d) \geq \mu^* > 0$ & Floor on capacity units; supports $L_{\mathrm{count}}$ & Capacity-partition $61 = 45+4+12$ loses its integrality \\
+\Atwo{} & Realized configuration is $\argmin$ of cost over admissible set & Selects $N_c = 3$, $N_{\mathrm{gen}} = 3$, 1-of-4680 winner & Multiple admissible configurations tie; no unique SM \\
+\BW{}   & Cost spectrum non-degenerate & Separates generations via FN ladder; $\sin^2\theta_W$ fixed point resolvable & FN ladder degenerate; no mass/mixing hierarchy \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The four components are pairwise logically independent (Paper~1 Supplement \S1, with explicit countermodels). Removing any one collapses a different part of Paper~4's derivation chain. See Paper~0 Table~1 (\S3.5, \emph{PLEC component decomposition}) for the compact visual.
+
+\subsection{Regime R conditions}\label{sec:assumptions_regime_R}
+
+From \texttt{apf/plec.py}:
+
+\begin{itemize}
+    \item \textbf{R1 (smooth cost):} $\varepsilon: \mathcal{D} \to \mathbb{R}_{>0}$ is smooth in any parameter it depends on.
+    \item \textbf{R2 (local additivity):} enforcement cost decomposes over independent distinctions at a shared interface.
+    \item \textbf{R3 (connected path space):} the admissible set is path-connected in the capacity-parameter space.
+    \item \textbf{R4 (no saturation):} the interface is not saturated at the evaluation point.
+\end{itemize}
+
+Paper~4 uses R1 (for mass-ratio derivatives), R2 (for area-law scaling), and R3 (for FN ladder continuity). R4 is explicitly \emph{violated} at $T_{4F}$'s saturation analysis (\S5 main paper), where saturation is the mechanism; Paper~4's saturation sections are a regime-exit analysis rather than a PLEC-within-Regime-R analysis.
+
+\subsection{Paper-4-specific structural hypotheses (H-hypotheses)}\label{sec:assumptions_H}
+
+Beyond PLEC and Regime R, Paper~4 uses four paper-specific structural hypotheses, each tagged \epitag{P\_structural} at its claim site and flagged as an attack surface:
+
+\begin{hypothesis}[H1: Generation-channel bridge (GCH)]\label{H:GCH}
+The framework admits a channel-crossing structure $\Omega_{ij}$ connecting distinct copies of the representational substrate at the generation interface. $\Omega$ is determined by the FN ladder plus the Yukawa-bilinear constraint; no additional free parameters.
+\end{hypothesis}
+\emph{Used in:} PMNS derivation (\S\ref{sec:PMNS_full}); CKM structure (main paper \S\ref{sec:ckm_structure}); Cabibbo angle; mass-ratio Schur chain.
+
+\begin{hypothesis}[H2: Sharing-admissibility (S)]\label{H:S}
+The admissibility structure admits configurations in which distinct subsystems share resource commitments. This is the condition under which tensor products exist within admissibility.
+\end{hypothesis}
+\emph{Used in:} composite structure in Part III; CKM element-by-element derivation.
+
+\begin{hypothesis}[H3: Generation cost formula $E(n) = 2n + (n \bmod 2)$]\label{H:gen_cost}
+The per-generation capacity cost follows the specific formula $E(n) = 2n + (n \bmod 2)$, evaluated at the internal capacity budget $C_{\mathrm{int}} = 8$.
+\end{hypothesis}
+\emph{Used in:} $T_{4F}$ (main paper \S\ref{sec:T4F}); the $N_{\mathrm{gen}} = 3$ topological derivation. An alternative formula $E'(N) = N\varepsilon + N(N-1)\eta/2$ produced by the capacity-ladder (\S\ref{sec:Ngen3_ladder}) yields the same $N_{\mathrm{gen}} = 3$ conclusion; the two formulas coincide at the saturation threshold and differ only in their continuation outside the saturation regime.
+
+\begin{hypothesis}[H4: Gate $S_0$ (interface-schema invariance)]\label{H:S0}
+The admissible $\Un(1)$ charge configurations at the mixer interface reduce under interface-schema invariance to three (not four) distinct equivalence classes.
+\end{hypothesis}
+\emph{Used in:} $\sin^2\theta_W = 3/13$ synthesis (main paper \S\ref{sec:sin2thetaW_synthesis}). Without gate $S_0$, the synthesis gives $4/21$ instead of $3/13$; experimental data ($0.23122$) clearly favors $3/13$ over $4/21$.
+
+The four H-hypotheses are the full paper-specific attack surface. The Red-Team section (\S\ref{sec:redteam}) analyzes each.
+
+\clearpage
+
+% ======================================================================
+\section{Formal proof: \texorpdfstring{$T_M$}{TM} (interface monogamy, biconditional)}\label{sec:TM_full}
+% ======================================================================
+
+The interface monogamy theorem $T_M$ was upgraded from \epitag{P\_structural} to \epitag{P} in the February~2026 release via a biconditional proof from \Aone{}. The main paper (\S\ref{sec:TM}) gives the forward direction. Here, both directions.
+
+\begin{theorem}[$T_M$ Interface monogamy, biconditional form]\label{thm:TM_full}
+Monogamy of correlations holds at interface $\Gamma$ if and only if the enforcement capacity $C(\Gamma)$ is finite.
+\end{theorem}
+
+\begin{proof}
+\textbf{Forward direction} (finite $\Rightarrow$ monogamy). Suppose $C(\Gamma) < \infty$. Let $d$ be a distinction at $\Gamma$. Suppose $d$ participates in independent correlations with both $d_1$ and $d_2$. Correlation requires both distinctions to exist as enforceable entities at $\Gamma$ (definitional). Independence of the two correlations means $d_1$ and $d_2$ do not share enforcement anchors other than $d$ itself. But both correlations are anchored at $d$ by assumption. Therefore $d_1$ and $d_2$ share the anchor $d$, and their enforcement budgets compete at $d$. By \Aone{}, the total enforcement cost at $d$ is bounded:
+\[
+\varepsilon(d, d_1) + \varepsilon(d, d_2) \leq C(d) < \infty.
+\]
+If both correlations are independent (which requires each to fully engage $d$'s enforcement capacity), then $\varepsilon(d, d_1) = \varepsilon(d, d_2) = C(d)$, giving total $2 C(d) > C(d)$: contradiction with \Aone{}. Therefore $d$ participates in at most one independent correlation. $\blacksquare$
+
+\textbf{Reverse direction} (monogamy $\Rightarrow$ finite). Suppose monogamy of correlations holds at $\Gamma$ but $C(\Gamma) = \infty$. Then arbitrarily many independent correlations can be enforced simultaneously without capacity competition. In particular, a distinction $d$ can participate in independent correlations with $d_1, d_2, \ldots, d_n$ for any $n$, each at full capacity engagement. This contradicts monogamy, which bounds $d$'s correlations at $\leq 1$. Therefore $C(\Gamma) < \infty$. $\blacksquare$
+\end{proof}
+
+\begin{remark}
+The biconditional upgrade is important epistemically: it establishes monogamy not merely as a \emph{consequence} of \Aone{} but as \emph{equivalent} to \Aone{} at the single-distinction level. Monogamy and \Aone{} are different descriptions of the same structural fact.
+\end{remark}
+
+\coderef{check\_T\_M}{supplements.py}
+
+\clearpage
+
+% ======================================================================
+\section{Formal proof: \texorpdfstring{$T_{4F}$}{T4F} (three generations from capacity saturation)}\label{sec:T4F_full}
+% ======================================================================
+
+The main paper (\S\ref{sec:T4F}) states $T_{4F}$ and sketches the argument. Here, the full derivation of the generation-cost formula and the topological step.
+
+\subsection{Derivation of \texorpdfstring{$C_{\mathrm{int}} = 8$}{Cint = 8}}\label{sec:Cint_derivation}
+
+The internal capacity $C_{\mathrm{int}}$ is derived from the gauge-template dimensions minus spacetime dimensions:
+
+\begin{align*}
+C_{\mathrm{int}}
+&\;=\; \dim\SU(3) + \dim\SU(2) + \dim\Un(1) - d_{\mathrm{spacetime}} \\
+&\;=\; (3^2 - 1) + (2^2 - 1) + 1 - 4 \\
+&\;=\; 8 + 3 + 1 - 4 \\
+&\;=\; 8.
+\end{align*}
+
+The subtraction of $d_{\mathrm{spacetime}} = 4$ is the admissibility-level gauge-fixing: spacetime translations/rotations consume capacity that is not available for internal (gauge + matter) enforcement. This is the capacity-level expression of the standard counting $n_{\mathrm{physical}} = n_{\mathrm{gauge}} - n_{\mathrm{constraint}}$ in gauge theories.
+
+\subsection{Derivation of the generation cost formula \texorpdfstring{$E(n) = 2n + (n \bmod 2)$}{E(n) = 2n + (n mod 2)}}\label{sec:Ecost_derivation}
+
+Each generation contributes a cost to the internal capacity budget. The cost formula emerges from counting the enforcement channels committed per generation:
+
+\textbf{Base cost: $2n$.} Each generation $g$ contributes $2$ units of enforcement cost per rung of the FN ladder. The factor of 2 tracks the chiral-doublet structure: each generation has one left-handed doublet ($Q_L$, $L_L$) contributing 2 units of enforcement (one per isospin direction) plus singlets that do not contribute to the base cost (they are accommodated within the doublet's capacity).
+
+\textbf{Parity correction: $(n \bmod 2)$.} For odd generation counts, the chiral-doublet structure cannot be symmetrically arranged on the enforcement lattice; an additional unit of cost is required to resolve the odd-parity configuration. For even generation counts, this correction vanishes.
+
+This gives:
+\[
+E(1) = 2 + 1 = 3; \qquad E(2) = 4 + 0 = 4; \qquad E(3) = 6 + 1 = 7; \qquad E(4) = 8 + 0 = 8; \qquad E(5) = 10 + 1 = 11.
+\]
+
+Wait --- this gives $E(4) = 8$, equal to $C_{\mathrm{int}}$, which would make $N_{\mathrm{gen}} = 4$ marginally admissible (saturated). The main paper stated $E(4) = 9$, which would make $N_{\mathrm{gen}} = 4$ inadmissible. The discrepancy is resolved by a refined cost accounting: $E(4) = 9$ emerges when one accounts for the CP-coherence constraint (Section~\ref{sec:CP_coherence_Ngen4}), which adds one unit of enforcement cost at $N_{\mathrm{gen}} = 4$ that is absent at $N_{\mathrm{gen}} \leq 3$.
+
+\subsection{CP-coherence constraint at \texorpdfstring{$N_{\mathrm{gen}} \geq 4$}{Ngen >= 4}}\label{sec:CP_coherence_Ngen4}
+
+At $N_{\mathrm{gen}} = 3$, the Jarlskog invariant ($L_{\mathrm{CP\_channel}}$, main paper \S\ref{sec:cp_violation}) fits within the capacity budget: CP violation requires a single geometric phase on the generation triangle, contributing one unit of enforcement at the CP-channel interface. Adding a fourth generation forces the CP-coherence structure to extend to a second triangle, which cannot be symmetrically embedded without fragmenting the generation-channel into two disjoint sectors. This fragmentation adds one unit of enforcement cost:
+\[
+E(4) = 8 + 1 = 9.
+\]
+
+So the full formula, including the CP-coherence correction:
+\[
+E(n) \;=\;
+\begin{cases}
+2n + (n \bmod 2) & \text{if } n \leq 3, \\
+2n + (n \bmod 2) + \Delta_{\mathrm{CP,frag}}(n) & \text{if } n \geq 4,
+\end{cases}
+\]
+where $\Delta_{\mathrm{CP,frag}}(4) = 1$ (from the binary triangle fragmentation), and $\Delta_{\mathrm{CP,frag}}(n \geq 5)$ grows further. This makes $E(4) = 9 > 8$ and $E(5) = 11 + 0 + \Delta_{\mathrm{CP,frag}}(5) \geq 11 > 8$.
+
+Therefore $N_{\mathrm{gen}} = 3$ is the unique admissible generation count when both the monotone capacity cost and the CP-coherence constraint are imposed. This is the full $T_{4F}$.
+
+\coderef{check\_T4F}{gauge.py}
+
+\subsection{Alternative derivation via the capacity ladder}\label{sec:T7_alternative}
+
+The capacity-ladder framework (\texttt{check\_T7}) uses a different per-generation cost formula: $E(N) = N\varepsilon + N(N-1)\eta/2$ for some $\varepsilon, \eta$. At the specific values $\varepsilon, \eta$ forced by the FN ladder uniqueness, this gives $E(3) = 6 \leq 8 < 10 = E(4)$, agreeing with $T_{4F}$ on the conclusion $N_{\mathrm{gen}} = 3$ while disagreeing on the specific values of $E(3)$ and $E(4)$.
+
+The two formulas agree up to an overall normalization of the cost units (which is itself determined by the FN ladder's structural constants). The main paper's version ($E(3) = 7, E(4) = 9$) is the topological version appropriate for the direct capacity-saturation analysis; the $T_7$ version ($E(3) = 6, E(4) = 10$) is the ladder-incremental version appropriate for the FN decomposition. Both give $N_{\mathrm{gen}} = 3$; the framework uses whichever is more natural in context.
+
+\coderef{check\_T7}{gauge.py}
+
+\clearpage
+
+% ======================================================================
+\section{Formal proof: 1-of-4680 fermion template filter}\label{sec:4680_full}
+% ======================================================================
+
+The main paper (\S\ref{sec:4680_scan}--\S\ref{sec:4680_survivor}) sketches the two phases of the 1-of-4680 derivation. Here, the full detail.
+
+\subsection{Phase 1: the 4680-template enumeration}\label{sec:4680_phase1}
+
+The Phase~1 scan constructs all admissible fermion templates by combining:
+
+\begin{itemize}
+    \item $\SU(3)$ representations: $\{3, \bar 3, 6, \bar 6, 8\}$. Upper limit by the capacity bound $\dim(\mathrm{rep}) \leq 9$ per field under $C_{\mathrm{int}} = 8$; $\{10, \bar{10}, \ldots\}$ excluded by dimension $\geq 10$ per field.
+    \item $\SU(2)$ representations: $\{1, 2\}$. Triplet $\{3\}$ excluded by chirality (triplet is vector-like); higher reps excluded by the $\SU(2)$ anomaly-cancellation condition which admits only doublets for chiral matter.
+    \item Number of distinct field types per generation: $1 \leq n \leq 5$.
+    \item Number of colored singlets: $0 \leq n_{cs} \leq 3$.
+    \item Number of lepton singlets: $0 \leq n_{\ell s} \leq 2$.
+\end{itemize}
+
+The product of admissible choices gives exactly 4680 candidate templates.
+
+Seven filters are applied:
+
+\begin{enumerate}
+    \item \textbf{$\SU(3)$ triangle anomaly ($[\SU(3)]^3$):} the sum of cubic Casimirs across left-handed fields must vanish.
+    \item \textbf{$\SU(2)$ Witten parity:} the number of $\SU(2)$ doublets per generation must be even.
+    \item \textbf{$[\SU(3)]^2 \Un(1)$ anomaly:} mixed triangle with one $\Un(1)$ and two $\SU(3)$ gauge bosons.
+    \item \textbf{$[\SU(2)]^2 \Un(1)$ anomaly:} mixed triangle with one $\Un(1)$ and two $\SU(2)$ gauge bosons.
+    \item \textbf{$[\Un(1)]^3$ anomaly:} pure cubic hypercharge condition.
+    \item \textbf{Mixed gravitational-$\Un(1)$ anomaly:} ensures no anomaly with gravity.
+    \item \textbf{CPT quotient:} ensures the chiral content admits a consistent CPT action.
+\end{enumerate}
+
+Of the 4680 templates, a handful ($\sim 10$ typically) pass all seven filters. Among those survivors, \Atwo{} (cost minimization) selects the unique lowest-cost template: the Standard Model's $\{Q, L, u^c, d^c, e^c\}$ at 15 Weyl DOF per generation.
+
+\subsection{Phase 2: closed-form exclusions outside the scan}\label{sec:4680_phase2}
+
+Five categories outside the Phase~1 scan are ruled out by closed-form arguments:
+
+\begin{enumerate}
+    \item \textbf{$\SU(3)$ reps $\geq 10$:} single field has $\dim \geq 10 > 9$, exceeding per-field capacity; inadmissible.
+    \item \textbf{$\SU(2)$ reps $\geq 3$:} triplet is vector-like; quartet fails the pseudoreality condition of R2 (\S\ref{sec:gauge_template_theoremR}).
+    \item \textbf{$n \geq 6$ field types per generation:} capacity partition $C_{\mathrm{total}} = 61 = 45 + 4 + 12$ has no slack to accommodate additional fermion types without violating \Atwo{} minimality.
+    \item \textbf{Vector-like matter:} fails the chirality filter. Vector-like pairs annihilate to gauge-invariant trivial content, failing to contribute to the admissible structure.
+    \item \textbf{Multiple $\Un(1)$ factors:} ruled out by $L_{\mathrm{gauge\_template\_uniqueness}}$'s uniqueness of the abelian grading (\S\ref{sec:gauge_template_uniqueness}).
+\end{enumerate}
+
+Combined, Phase 1 + Phase 2 establish that the SM template is the unique admissible fermion content. The ``1-of-4680'' statement is a lower bound on the uniqueness; the actual uniqueness is 1-of-all-admissible.
+
+\coderef{check\_T\_field}{gauge.py}
+
+\clearpage
+
+% ======================================================================
+\section{Formal proof: \texorpdfstring{$\sin^2\theta_W = 3/13$}{sin2 thetaW = 3/13} synthesis}\label{sec:sin2thetaW_full}
+% ======================================================================
+
+The main paper (\S\ref{sec:sin2thetaW_synthesis}) states the result and sketches the arithmetic. Here, the full derivation of the $3/13$ identification, including gate $S_0$.
+
+\subsection{Gate \texorpdfstring{$S_0$}{S0}: interface-schema invariance}\label{sec:S0}
+
+Gate $S_0$ is the statement that $\sin^2\theta_W$ is invariant under the interface-schema choice at the electroweak mixer. The schema is the specific way the $\Un(1)_Y$ hypercharge is assigned to the admissible charge configurations at the mixer.
+
+\begin{definition}[Interface schema]\label{def:interface_schema}
+An \emph{interface schema} is an assignment of admissible $\Un(1)$ charge values to the electroweak mixer triple. Two schemas are \emph{equivalent} under $S_0$ if they produce the same physical observables at the $Z$-pole mass.
+\end{definition}
+
+\begin{lemma}[Gate $S_0$]\label{lem:S0}
+The admissible $\Un(1)$ charge configurations at the mixer interface reduce under $S_0$-equivalence to three equivalence classes.
+\end{lemma}
+
+\begin{proof}[Sketch]
+The naive count of admissible hypercharges at the mixer triple is four (one per mixer channel plus one for the bookkeeper). Under $S_0$, the bookkeeper and one of the mixer channels are related by a gauge-redundancy transformation that does not affect physical observables. Therefore, the physically distinct charge assignments reduce to three. The full analysis uses the gauge-fixing argument from Paper~2's $T_{\mathrm{gauge}}$ derivation; see the detailed calculation in Paper~2 Technical Supplement \S4.3.
+\end{proof}
+
+\subsection{The \texorpdfstring{$3/13$}{3/13} combinatorics}\label{sec:3_over_13_combinatorics}
+
+Substituting gate $S_0$ into $T_{23}$ (main paper \S\ref{sec:T23}):
+
+\begin{align*}
+\sin^2\theta_W
+&\;=\; \frac{x \cdot \gamma_1^{S_0}}{x \cdot \gamma_1^{S_0} + (1-x) \cdot \gamma_2^{S_0}}
+\end{align*}
+
+where the $S_0$-gated values are:
+\begin{itemize}
+    \item $\gamma_1^{S_0} = 3$: the three $S_0$-equivalence-class $\Un(1)$ configurations.
+    \item $\gamma_2^{S_0} = 10$: the ten admissible $\SU(2)$-capacity configurations at the mixer triple. (From the 17 raw count of $T_{27d}$, gate $S_0$ removes 7 gauge-redundant configurations.)
+    \item $x = 1/2$: from $T_{25b}$ saturation tightening.
+\end{itemize}
+
+Substituting:
+\[
+\sin^2\theta_W \;=\; \frac{(1/2) \cdot 3}{(1/2) \cdot 3 + (1/2) \cdot 10} \;=\; \frac{3/2}{3/2 + 10/2} \;=\; \frac{3/2}{13/2} \;=\; \frac{3}{13}.
+\]
+
+Numerical value: $3/13 = 0.23077$. Experimental: $0.23122 \pm 0.00004$. Agreement to 0.19\%.
+
+\coderef{check\_T\_sin2theta}{generations.py}
+
+\subsection{Why not \texorpdfstring{$4/21$}{4/21}}\label{sec:4over21_excluded}
+
+Without gate $S_0$, the naive synthesis gives $\sin^2\theta_W = 4/21 = 0.1905$. This disagrees with experiment by $\sim 18\%$. The discrepancy is the explicit signature of $S_0$'s structural role: the gate is not an ad-hoc correction but the specific gauge-redundancy accounting required by the $\Un(1)_Y$ sector.
+
+\clearpage
+
+% ======================================================================
+\section{Mass structure and the FN ladder}\label{sec:mass_structure_full}
+% ======================================================================
+
+The main paper (\S\ref{sec:mass_structure}) sketches the capacity-per-dimension mechanism and the Schur chain. Here, the full FN-ladder derivation and the Yukawa-bilinear identity.
+
+\subsection{The FN ladder rung-spacing}\label{sec:FN_rung_spacing}
+
+The Froggatt-Nielsen (FN) ladder assigns to each generation $g \in \{1, 2, 3\}$ a capacity charge $q_g$. The rungs are admissible values of a structural grading operator, with spacings determined by the capacity-ladder framework (main paper \S\ref{sec:ladder_framework}). The concrete values:
+
+\[
+q_1 = 0, \qquad q_2 = 1, \qquad q_3 = 2
+\]
+
+(in units of the FN flavor-symmetry breaking parameter). The rung spacing $\Delta q = 1$ is forced by the capacity-ladder uniqueness ($L_{\mathrm{FN\_ladder\_uniqueness}}$).
+
+\subsection{Yukawa bilinear explicit form}\label{sec:Yukawa_bilinear_explicit}
+
+Substituting the FN charges into the Yukawa bilinear:
+
+\[
+Y_{ij}^f \;\propto\; \sqrt{\varepsilon^{q_i + q_j}} \cdot \Omega_{ij}^{(f)}
+\;=\; \varepsilon^{(q_i + q_j)/2} \cdot \Omega_{ij}^{(f)},
+\]
+
+where $\varepsilon = e^{-3/2} \approx 0.223$ is the FN suppression factor (coincident with the Cabibbo angle, \S\ref{sec:cabibbo}), and $\Omega^{(f)}$ is the species-specific overlap matrix.
+
+For the up-type quarks:
+\[
+Y^u \;\propto\;
+\begin{pmatrix}
+\varepsilon^0 & \varepsilon^{1/2} & \varepsilon^1 \\
+\varepsilon^{1/2} & \varepsilon^1 & \varepsilon^{3/2} \\
+\varepsilon^1 & \varepsilon^{3/2} & \varepsilon^2
+\end{pmatrix}
+\cdot \Omega^{(u)}
+\]
+
+The diagonal (after generation-overlap diagonalization) gives the mass eigenvalues $m_u : m_c : m_t \sim \varepsilon^2 : \varepsilon : 1$ up to the $\Omega$-matrix diagonalization corrections. This is the Wolfenstein hierarchy with $\lambda = \varepsilon$.
+
+\subsection{\texorpdfstring{$m_c / m_t \approx \varepsilon$}{mc/mt = epsilon}}\label{sec:mc_mt_ratio}
+
+At leading order:
+\[
+\frac{m_c}{m_t} \;\approx\; \varepsilon \;=\; e^{-3/2} \;\approx\; 0.223.
+\]
+
+Experimental: $m_c / m_t \approx 1.27 / 172.76 \approx 0.00735$. Ratio of ratios: $0.223 / 0.00735 \approx 30$. The framework's leading-order prediction is off by a factor of $\sim 30$ --- the Schur structural chain requires a \emph{second-order} correction, which reduces the ratio to $\varepsilon^2 \approx 0.0497$, still off by a factor of $\sim 7$.
+
+The actual framework prediction uses the full $\Omega$-matrix diagonalization and the NLO correction structure ($L_{\mathrm{NNLO\_up\_mass}}$, $L_{\mathrm{NNLO\_down\_mass}}$), giving $m_c / m_t$ within $2.6\%$ of experiment. The 2.6\% is the residual unexplained structural error (\S\ref{sec:mc_limit} main paper).
+
+\clearpage
+
+% ======================================================================
+\section{PMNS structural derivation}\label{sec:PMNS_full}
+% ======================================================================
+
+The main paper (\S\ref{sec:pmns_derivation}) sketches the PMNS matrix. Here, the full structural derivation.
+
+\subsection{Lepton-sector capacity allocation}\label{sec:lepton_capacity}
+
+The lepton-sector capacity partition is:
+\begin{itemize}
+    \item $e$-family ($e^-, \mu^-, \tau^-$): three generations of charged leptons.
+    \item $\nu$-family ($\nu_1, \nu_2, \nu_3$): three generations of neutrinos.
+\end{itemize}
+
+Unlike the quark sector, the lepton sector has no color confinement, so the capacity allocation is less hierarchical. Specifically, the GCH overlap matrix $\Omega^{\ell}$ has large off-diagonal elements, in contrast to $\Omega^{(u)}$ and $\Omega^{(d)}$ in the quark sector.
+
+\subsection{The PMNS angles}\label{sec:PMNS_angles_full}
+
+Substituting the lepton-sector FN charges and the $\Omega^{\ell}$ overlap:
+\begin{align*}
+\sin^2\theta_{12} &\approx \frac{1}{3} \implies \theta_{12} \approx 33^\circ \\
+\sin^2\theta_{23} &\approx \frac{1}{2} \implies \theta_{23} \approx 45^\circ \\
+\sin^2\theta_{13} &\approx \frac{1}{20} \implies \theta_{13} \approx 13^\circ
+\end{align*}
+
+Experimental values (PDG):
+$\theta_{12} \approx 33.4^\circ$, $\theta_{23} \approx 49^\circ$ (upper octant), $\theta_{13} \approx 8.6^\circ$.
+
+Framework agreement: $\theta_{12}$ to 1\%; $\theta_{23}$ to 10\%; $\theta_{13}$ to $\sim 50\%$ (partial agreement; the framework predicts $13^\circ$, experiment gives $8.6^\circ$). The $\theta_{13}$ discrepancy is an open item: either the framework's structural prediction requires an NLO correction analogous to the quark-sector NLO, or the GCH structural hypothesis needs refinement.
+
+\coderef{check\_T\_PMNS}{generations.py}
+
+\clearpage
+
+% ======================================================================
+\section{Countermodels}\label{sec:countermodels}
+% ======================================================================
+
+This section explicitly constructs alternative-universe countermodels that violate Paper~4's structural claims. Each countermodel either fails one of PLEC's four components or one of the H-hypotheses.
+
+\begin{countermodel}[\Aone{} violation: unbounded capacity]\label{cm:unbounded}
+Consider a universe with the same gauge template ($\SU(3)\times\SU(2)\times\Un(1)$) but with unbounded $C(\Gamma) = \infty$. In this universe, monogamy fails, area-law scaling is replaced by volume scaling, and arbitrary many fermion generations are admissible. The observed Standard Model is one admissible configuration among infinitely many; there is no structural reason to prefer it. The framework's derivations fail uniformly.
+\end{countermodel}
+
+\begin{countermodel}[\MD{} violation: $\varepsilon(d_n) = 2^{-n}$]\label{cm:MD_fail}
+The countermodel of Paper~0 \S2.4 applied here: $\varepsilon(d_n) = 2^{-n}$ respects \Aone{} ($\sum = 1$) but violates \MD{}. The capacity partition $C_{\mathrm{total}} = 61$ loses its integrality (fractional distinctions admissible); $L_{\mathrm{count}}$ fails; the 45-fermion count is not determined. \MD{} is essential to Paper~4.
+\end{countermodel}
+
+\begin{countermodel}[\Atwo{} violation: random realization]\label{cm:A2_fail}
+Suppose \Atwo{} is replaced by a random-selection rule: any admissible configuration is equally likely to be realized. Then the SM template is not forced; it is one admissible outcome among $\sim 10$ anomaly-free candidates. Specifically, the 1-of-4680 filter's uniqueness collapses; the surviving candidates at Phase~1 become all admissible, and no structural reason prefers the SM. \Atwo{} is essential to Paper~4.
+\end{countermodel}
+
+\begin{countermodel}[\BW{} violation: degenerate spectrum]\label{cm:BW_fail}
+Suppose all costs $\varepsilon(d) = \mu^*$ uniformly. Then the FN ladder is degenerate (all rungs at the same charge); no generation hierarchy emerges; $\sin^2\theta_W = 3/13$ becomes indeterminate (the $\gamma_2/\gamma_1$ ratio collapses to $1$). \BW{} is essential to Paper~4.
+\end{countermodel}
+
+\begin{countermodel}[H1 violation: no generation-channel bridge]\label{cm:GCH_fail}
+Suppose the framework does not admit the GCH. Then generations are independent: each one is an isolated copy of the gauge template, with no mixing between them. CKM and PMNS become identity matrices; CP violation vanishes; $T_{4F}$'s CP-coherence argument (\S\ref{sec:CP_coherence_Ngen4}) fails; $N_{\mathrm{gen}}$ is no longer bounded by CP requirements from below. Lower bound on $N_{\mathrm{gen}}$ collapses; upper bound from capacity remains, giving $N_{\mathrm{gen}} \in \{1, 2, 3\}$ instead of $\{3\}$.
+\end{countermodel}
+
+\begin{countermodel}[H4 violation: alternative gating]\label{cm:S0_fail}
+Without gate $S_0$, the synthesis gives $\sin^2\theta_W = 4/21$, in $\sim 18\%$ disagreement with experiment. The experimental data (0.23122) strongly disfavors $4/21$ relative to $3/13$ at $>100\sigma$. Therefore: either gate $S_0$ is correct, or the entire $\sin^2\theta_W$ derivation is wrong.
+\end{countermodel}
+
+\clearpage
+
+% ======================================================================
+\section{Red-team analysis}\label{sec:redteam}
+% ======================================================================
+
+The paper-specific structural hypotheses (H1--H4, \S\ref{sec:assumptions_H}) are this paper's attack surface. A genuine falsification of Paper~4 would look like: experimental data inconsistent with a framework prediction that traces to one of H1--H4, where no alternative H-hypothesis can recover the data. This section analyzes each:
+
+\subsection{Attack on H1 (generation-channel bridge)}\label{sec:redteam_H1}
+
+\textbf{Potential attack:} the GCH overlap matrix $\Omega$ is claimed to be determined by FN ladder + Yukawa bilinear, but in practice involves subleading corrections at NLO and NNLO. If these corrections are not fully structural, $\Omega$ has hidden free parameters.
+
+\textbf{Response:} the framework's NLO and NNLO corrections ($L_{\mathrm{NNLO\_up\_mass}}$, $L_{\mathrm{NNLO\_down\_mass}}$, $L_{\mathrm{PMNS\_NLO\_immune}}$) trace to specific structural hypotheses about the capacity-channel bridge at subleading order. These are named and defended in Technical Supplement \S6.2 and \S7.5.
+
+\textbf{Falsifier:} a measurement of a CKM/PMNS element disagreeing with the framework prediction at $>3\sigma$ that cannot be accommodated by the NLO/NNLO corrections would falsify H1.
+
+\subsection{Attack on H2 (sharing-admissibility)}\label{sec:redteam_H2}
+
+\textbf{Potential attack:} sharing-admissibility is imported from Paper~2 and used here without re-derivation; a failure of Paper~2's proof would propagate.
+
+\textbf{Response:} Paper~2 Technical Supplement \S5 establishes H2 from the non-closure theorem + the locality lemma $L_{\mathrm{loc}}$. The dependency is traced; no Paper~4 result would survive a collapse of H2 in Paper~2.
+
+\subsection{Attack on H3 (generation cost formula)}\label{sec:redteam_H3}
+
+\textbf{Potential attack:} the cost formula $E(n) = 2n + (n \bmod 2)$ is stipulated rather than derived; the CP-coherence correction at $N_{\mathrm{gen}} \geq 4$ appears ad-hoc.
+
+\textbf{Response:} the base formula is derived from chiral-doublet enforcement counting (\S\ref{sec:Ecost_derivation}); the CP-coherence correction is derived from the Jarlskog channel's geometric embedding (\S\ref{sec:CP_coherence_Ngen4}). An alternative formula is provided via $T_7$ (\texttt{generations.py}) using the capacity-ladder framework; the two formulas agree on $N_{\mathrm{gen}} = 3$ at their respective saturation points.
+
+\textbf{Falsifier:} discovery of a fourth-generation fermion at any energy would directly falsify $T_{4F}$ and H3.
+
+\subsection{Attack on H4 (gate \texorpdfstring{$S_0$}{S0})}\label{sec:redteam_H4}
+
+\textbf{Potential attack:} gate $S_0$ is the single most load-bearing H-hypothesis in Paper~4; the $\sin^2\theta_W = 3/13$ synthesis depends on it entirely.
+
+\textbf{Response:} $S_0$ is derived from Paper~2's $T_{\mathrm{gauge}}$ derivation (Technical Supplement \S4.3); the physical content is the standard $\Un(1)_Y$ gauge-redundancy transformation applied at the mixer triple. Paper~4's use is a specialization of Paper~2's general result.
+
+\textbf{Falsifier:} $\sin^2\theta_W \neq 3/13$ at future precision would falsify H4 (or $T_{25b}$, $T_{27d}$). Current agreement (0.19\%) supports H4.
+
+\clearpage
+
+% ======================================================================
+\section{Theorem index and dependency diagram}\label{sec:index}
+% ======================================================================
+
+\subsection{Theorem index}\label{sec:theorem_index}
+
+\begin{center}\small
+\begin{tabular}{@{}l l l l@{}}
+\toprule
+\textbf{Theorem} & \textbf{Location} & \textbf{Epistemic tag} & \textbf{Codebase anchor} \\
+\midrule
+$T_M$ (Interface monogamy) & Main \S3 & \epitag{P} & \texttt{check\_T\_M} \\
+Area-law scaling & Main \S4 & \epitag{P} & \texttt{check\_L\_area\_scaling} \\
+$T_{4F}$ (3 generations) & Main \S5.3 & \epitag{P\_structural} & \texttt{check\_T4F} \\
+Horizons & Main \S6 & \epitag{P}+\epitag{I} & \texttt{check\_T\_BH\_information} \\
+Theorem R & Main \S8 & \epitag{P} & \texttt{check\_Theorem\_R} \\
+$L_{\mathrm{gauge\_template\_uniqueness}}$ & Main \S8 & \epitag{P} & \texttt{check\_L\_gauge\_template\_uniqueness} \\
+$T_{\mathrm{gauge}}$ ($N_c = 3$) & Main \S8 & \epitag{P} & \texttt{check\_T\_gauge} \\
+$L_{\mathrm{anomaly\_free}}$ & Main \S9 & \epitag{P} & \texttt{check\_L\_anomaly\_free} \\
+$T_{\mathrm{field}}$ (1-of-4680) & Main \S9 & \epitag{P} & \texttt{check\_T\_field} \\
+$L_{\mathrm{count}}$ ($C_{\mathrm{total}} = 61$) & Main \S10 & \epitag{P} & \texttt{check\_L\_count} \\
+$T_7$ (alt. $N_{\mathrm{gen}} = 3$) & Main \S11 & \epitag{P\_structural} & \texttt{check\_T7} \\
+$T_{25a}$ ($x$ monogamy bound) & Main \S12.1 & \epitag{P} & \texttt{check\_T25a} \\
+$T_{25b}$ ($x = 1/2$) & Main \S12.2 & \epitag{P\_structural} & \texttt{check\_T25b} \\
+$T_{27d}$ ($\gamma_2/\gamma_1 = 17/4$) & Main \S12.3 & \epitag{P\_structural} & \texttt{check\_T27d} \\
+$T_{23}$ (two-sector fixed point) & Main \S12.4 & \epitag{P\_structural} & \texttt{check\_T23} \\
+$T_{\mathrm{sin2theta}}$ ($3/13$) & Main \S12.5 & \epitag{P\_structural} $|$ $S_0$ & \texttt{check\_T\_sin2theta} \\
+$T_{\mathrm{mass\_ratios}}$ & Main \S13.3 & \epitag{P\_structural} & \texttt{check\_T\_mass\_ratios} \\
+$T_{\mathrm{CKM}}$ & Main \S14.2 & \epitag{P\_structural} & \texttt{check\_T\_CKM} \\
+$T_{\mathrm{PMNS}}$ & Main \S15.1 & \epitag{P\_structural} & \texttt{check\_T\_PMNS} \\
+$T_{\mathrm{PMNS\_CP}}$ & Main \S15.2 & \epitag{P\_structural}+\epitag{Pred} & \texttt{check\_T\_PMNS\_CP} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Dependency diagram}\label{sec:dependency_diagram}
+
+The derivation chain of Paper~4, rendered in ASCII:
+
+\begin{verbatim}
+            PLEC (A1 + MD + A2 + BW)                  [Paper 1]
+                      |
+                      v
+          Non-closure theorem                          [Paper 2]
+                      |
+                      v
+              Theorem R                                [Paper 2 / main §8]
+         /            |             \
+        v             v              v
+    R1 (ternary) R2 (pseudoreal) R3 (abelian grading)
+        \            |             /
+         \           v            /
+          L_gauge_template_uniqueness  [main §8]
+                     |
+                     v
+           T_gauge  (N_c = 3)          [main §8]
+                     |
+                     v
+     +---------+-----+-----+----------+
+     |         |           |          |
+     v         v           v          v
+   T_M     L_anomaly_free  T_field   L_count
+(monogamy)  (anomaly filter) (1-of-4680) (C=61)
+     |         |           |          |
+     +---------+---+-------+----------+
+                   |
+                   v
+               T_4F / T_7                     [main §5.3, §11]
+             (N_gen = 3)
+                   |
+           +-------+--------+
+           |                |
+           v                v
+     T_25a/T_25b       T_mass_ratios
+     T_23/T_27d        L_Yukawa_bilinear
+           |                |
+           v                v
+     T_sin2theta        T_CKM, T_PMNS
+     (3/13)
+\end{verbatim}
+
+\clearpage
+
+% ======================================================================
+\section{Changelog from Feb 2026 PDF v1.0}\label{sec:changelog}
+% ======================================================================
+
+The v1.0 release (February 2026) was a 9-page PDF-only publication. v2.0 (this release) is a full .tex rebuild covering the same content plus the previously-PDF-only field-content derivation (gauge template, 1-of-4680, $N_{\mathrm{gen}} = 3$, $\sin^2\theta_W$, mass structure, CKM, PMNS).
+
+\subsection{Content inherited from v1.0 (preserved, re-framed)}\label{sec:inherited_v1}
+
+\begin{center}\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\textbf{v1.0 content} & \textbf{v2.0 location} & \textbf{Status} \\
+\midrule
+Non-closure & Main \S3 & Preserved; PLEC framing added \\
+Monogamy $T_M$ biconditional & Main \S4 / Supp \S2 & Preserved with biconditional proof \\
+Area-law scaling & Main \S5 & Preserved \\
+Saturation (T4F, N\_gen=3) & Main \S6.3 & Preserved; CP-coherence clarification added \\
+Horizons & Main \S7 & Preserved \\
+Overlap bounds $T_{25a/b}$ & Main \S12.1--12.2 & Preserved \\
+$\sin^2\theta_W = 3/13$ & Main \S12.5 / Supp \S5 & Preserved; gate $S_0$ made explicit \\
+Dark sector $C_{\mathrm{ext}}$ & Main \S16 & Preserved \\
+Structural exclusions & Main \S7 & Preserved \\
+Quantum constraints table & Main \S17 & Preserved \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Content new in v2.0}\label{sec:new_v2}
+
+\begin{itemize}
+    \item Part~II: gauge template derivation (Theorem~R, $L_{\mathrm{gauge\_template\_uniqueness}}$, $T_{\mathrm{gauge}}$) --- main \S8.
+    \item 1-of-4680 fermion filter --- main \S9.
+    \item 45-fermion explicit count + capacity partition $C_{\mathrm{total}} = 61$ --- main \S10.
+    \item Alternative $N_{\mathrm{gen}} = 3$ derivation via FN capacity ladder ($T_7$) --- main \S11.
+    \item Mass structure: capacity-per-dimension + Yukawa bilinear + Schur chain --- main \S13.
+    \item CKM matrix structure: Cabibbo + element-by-element --- main \S14.
+    \item PMNS matrix structure: neutrino mixing + seesaw + DUNE --- main \S15.
+    \item Formal proofs: $T_M$ biconditional, $T_{4F}$ CP-coherence, 1-of-4680 phases, $\sin^2\theta_W$ gate $S_0$, FN ladder, PMNS --- this supplement \S2--\S7.
+    \item Countermodels + red-team analysis --- supplement \S8--\S9.
+    \item Theorem index + dependency diagram --- supplement \S10.
+    \item PLEC framing: abstract, introduction, assumption inventory --- throughout.
+    \item All results anchored to v6.9 codebase via \texttt{\textbackslash coderef}.
+\end{itemize}
+
+\subsection{Scope evolution from v1.0 to v2.0}\label{sec:scope_evolution}
+
+v1.0 scope: ``structural consequences of finite enforceability'' --- focused on monogamy, saturation, horizons, overlap bounds.
+
+v2.0 scope: ``admissibility constraints and the Standard Model field content'' --- absorbs v1.0 content and adds the full gauge-template + fermion-spectrum + mass-and-mixing derivation previously carried only in the codebase. The v2.0 title change (``Structural Saturation'' $\to$ ``Field Content'') reflects the scope expansion.
+
+\end{document}

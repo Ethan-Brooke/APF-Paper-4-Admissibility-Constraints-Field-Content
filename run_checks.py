@@ -9,7 +9,7 @@ Usage:
 This is the standalone-repo verifier for Admissibility Constraints Field Content (APF Paper 4).
 The full APF codebase v6.8 (frozen 2026-04-18) verifies 348 checks across
 335 bank-registered theorems plus apf/standalone/ — this paper's repo
-verifies the 0-theorem subset directly cited by the manuscript.
+verifies the 40-theorem subset directly cited by the manuscript.
 """
 
 import sys

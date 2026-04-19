@@ -76,7 +76,7 @@ If you're loading this repo cold and want to understand Paper 4 well enough to r
 4. **`README.md`** — paper-specific orientation and the verification recipe. Badges, theorem table, install.
 5. **`apf/core.py`** — the vendored code. Read at least one check function fully. This is ground truth.
 6. **`run_checks.py`** + run it — confirms the local state works.
-7. **`Paper_4__PDF only (source-pending).tex`** or `.pdf` — the manuscript. Read §1 (intro) and the section you care about. Don't try to read the whole paper first.
+7. **`Paper_4_Admissibility_Constraints_Field_Content_v2.0.tex`** or `.pdf` — the manuscript. Read §1 (intro) and the section you care about. Don't try to read the whole paper first.
 8. **Technical Supplement** if present — canonical proofs. Dense; dip in only where you need depth.
 9. **`ai_context/wiki/`** — concept pages (Axiom A1, Derivation Chain, Born Rule, etc.) and per-paper pages. Navigate from `wiki/INDEX.md`.
 10. **`ai_context/AUDIT_DISCIPLINE.md`** — read before you propose any substantive change or critique. This is the posture the project expects from AI contributors.

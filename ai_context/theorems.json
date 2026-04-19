@@ -1,6 +1,6 @@
 {
   "total_bank_registered": 342,
-  "bundled_in_this_repo": 0,
+  "bundled_in_this_repo": 36,
   "modules": [
     "core",
     "cosmology",
@@ -267,7 +267,7 @@
         "L_loc"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "M",
@@ -576,7 +576,7 @@
         "L_epsilon*"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_Tsirelson",
@@ -1031,7 +1031,7 @@
         "T12",
         "T12E"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_singlet_Gram",
@@ -1436,7 +1436,7 @@
         "T9_grav"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_anomaly_nonpert",
@@ -1491,7 +1491,7 @@
         "L_loc"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_dim_angle",
@@ -1530,7 +1530,7 @@
         "T5"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_proton_decay_channels",
@@ -1623,7 +1623,7 @@
         "T_channels"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T5",
@@ -1653,7 +1653,7 @@
         "T_eta"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T9",
@@ -1739,7 +1739,7 @@
         "T6B_beta_one_loop"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_gauge",
@@ -1759,7 +1759,7 @@
         "L_gauge_template_uniqueness"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_particle",
@@ -1862,7 +1862,7 @@
         "T_confinement"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_AF_capacity",
@@ -1897,7 +1897,7 @@
         "T_CKM"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_CP_dual_mechanism",
@@ -1972,7 +1972,7 @@
         "L_equation_of_state",
         "L_DESI_response"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_FN_ladder_uniqueness",
@@ -1988,7 +1988,7 @@
         "L_H_curv"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_Fisher_curvature",
@@ -2276,7 +2276,7 @@
         "T_channels",
         "L_mass_from_capacity"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_adjoint_sep",
@@ -2401,7 +2401,7 @@
         "L_NNLO_three_effects",
         "L_md_zero"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_capacity_depth",
@@ -2437,7 +2437,7 @@
         "L_seesaw_type_I"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_channel_crossing",
@@ -2566,7 +2566,7 @@
         "L_dark_budget"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_e3_gen0",
@@ -2619,7 +2619,7 @@
         "T_eta"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_holonomy_phase",
@@ -2685,7 +2685,7 @@
         "L_Gram_generation",
         "L_beta"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_mass_mixing_indep",
@@ -2724,7 +2724,7 @@
         "L_nuR_enforcement",
         "L_sigma_VEV"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_md_zero",
@@ -3059,7 +3059,7 @@
         "T27d"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T24",
@@ -3092,7 +3092,7 @@
         "T_channels"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T25b",
@@ -3107,7 +3107,7 @@
         "T4F"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T26",
@@ -3160,7 +3160,7 @@
       "cross_refs": [
         "T26"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T4G",
@@ -3247,7 +3247,7 @@
         "L_CP_channel",
         "L_NLO_texture"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_LV",
@@ -3292,7 +3292,7 @@
         "T8"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_PMNS_CP",
@@ -3311,7 +3311,7 @@
         "T_q_Higgs"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_S0",
@@ -3347,7 +3347,7 @@
         "L_cost"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_mass_ratios",
@@ -3371,7 +3371,7 @@
         "L_epsilon*"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_nu_ordering",
@@ -3385,7 +3385,7 @@
         "T_PMNS"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_q_Higgs",
@@ -3421,7 +3421,7 @@
         "T_S0"
       ],
       "cross_refs": [],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "A9_closure",
@@ -3977,7 +3977,7 @@
         "Regime_exit_Type_V",
         "T9_grav"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "Regime_exit_Type_I",
@@ -4049,7 +4049,7 @@
         "Regime_R",
         "T8"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "Regime_exit_Type_V",
@@ -4753,7 +4753,7 @@
         "T_deSitter_entropy",
         "L_equip"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "L_CKM_phase_bracket",
@@ -5968,7 +5968,7 @@
         "L_cluster",
         "T_deSitter_entropy"
       ],
-      "bundled_in_this_repo": false
+      "bundled_in_this_repo": true
     },
     {
       "name": "T_CPT",

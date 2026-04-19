@@ -40,14 +40,14 @@ python run_checks.py
 Expected output:
 
 ```
-      Paper 4 (Admissibility Constraints and Structural Saturation): 0 passed, 0 failed, 0 total — verified in <minutes>
+      Paper 4 (Admissibility Constraints and Structural Saturation): 40 passed, 0 failed, 40 total — verified in <minutes>
 ```
 
 **4. Individual inspection.**
 
 ```python
 from apf.bank import get_check
-r = get_check('T_Born')()
+r = get_check('name')()
 print(r['key_result'])
 ```
 
@@ -61,6 +61,46 @@ This table maps every result in the manuscript to its executable verification.
 
 | Check | Type | Summary |
 |-------|------|---------|
+| `name` | Other |  |
+| `check_Regime_R` | Other | Regime_R: PLEC Well-Posedness under R1..R4 [P]. |
+| `check_Theorem_R` | Theorem | Theorem_R: Representation Requirements from Admissibility. |
+| `check_L_gauge_template_uniqueness` | Lemma | L_gauge_template_uniqueness: SU(N_c)×SU(2)×U(1) is the Unique Gauge Template. |
+| `check_L_count` | Lemma | L_count: Capacity Counting ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â 1 structural enforcement channel = 1 unit. |
+| `check_L_nc` | Lemma | L_nc: Non-Closure from Admissibility Physics + Locality. |
+| `check_T_M` | Theorem | T_M: Interface Monogamy. |
+| `check_L_area_scaling` | Lemma |  |
+| `check_Regime_exit_Type_IV` | Other | Regime_exit_Type_IV: Loss of Smooth or Local Structure [P]. |
+| `check_T4F` | Theorem | T4F: Flavor-Capacity Saturation. |
+| `check_T7` | Theorem | T7: Generation Bound N_gen = 3 [P]. |
+| `check_T_BH_information` | Theorem | T_BH_information: Black Hole Information Preservation [P]. |
+| `check_L_BH_page_curve_capacity` | Lemma | L_BH_page_curve_capacity: Page Curve from Capacity Counting [P]. |
+| `check_T_gauge` | Theorem | T_gauge: SU(3)*SU(2)*U(1) from Capacity Budget. |
+| `check_L_anomaly_free` | Lemma | L_anomaly_free: Gauge Anomaly Cancellation Cross-Check [P]. |
+| `check_L_Witten_parity` | Lemma |  |
+| `check_T_field` | Theorem | T_field: SM Fermion Content -- Exhaustive Derivation. |
+| `check_L_saturation_partition` | Lemma | L_saturation_partition: Type-Count Partition is Saturation-Independent [P]. |
+| `check_T_capacity_ladder` | Theorem | T_capacity_ladder: Capacity Charges from Budget [P]. |
+| `check_L_FN_ladder_uniqueness` | Lemma | L_FN_ladder_uniqueness: q_B = (7,4,0) is Unique Cost-Minimal Partition [P]. |
+| `check_T25a` | Theorem | T25a: Overlap Bounds from Interface Monogamy. |
+| `check_T25b` | Theorem | T25b: Overlap Bound from Saturation. |
+| `check_T27d` | Theorem | T27d: gamma_2/gamma_1 = d + 1/d from Representation Principles. |
+| `check_T23` | Theorem | T23: Fixed-Point Formula for sin^2theta_W. |
+| `check_T_sin2theta` | Theorem | T_sin2theta: Weinberg Angle -- structurally derived from fixed point. |
+| `check_L_capacity_per_dimension` | Lemma | L_capacity_per_dimension: Neutrino d_1 = x^(q_B1/d_Y) [P]. |
+| `check_L_Yukawa_bilinear` | Lemma | L_Yukawa_bilinear: Yukawa Coupling Is Bilinear in Generation Amplitudes [P]. |
+| `check_T_mass_ratios` | Theorem | T_mass_ratios: Six Charged Fermion Mass Ratios from Zero Parameters [P]. |
+| `check_L_mass_from_capacity` | Lemma | L_mass_from_capacity: Complete Mass Matrix Derivation — Zero FN Imports [P]. |
+| `check_L_c_FN_gap` | Lemma | L_c_FN_gap: NNLO Coefficient c = x^Δq from FN Charge Gap [P]. |
+| `check_T_CKM` | Theorem | T_CKM: Zero-Parameter CKM Matrix Prediction [P]. |
+| `check_L_gen_path` | Lemma | L_gen_path: Generation Graph Is a Path [P]. |
+| `check_L_CP_channel` | Lemma | L_CP_channel: Channel Asymmetry Enables CP Violation [P \| L_H_curv, T_q_Higgs]. |
+| `check_T_PMNS` | Theorem | T_PMNS: Zero-Parameter PMNS Neutrino Mixing Matrix [P]. |
+| `check_T_PMNS_CP` | Theorem | T_PMNS_CP: Leptonic CP Violation Vanishes Exactly [P]. |
+| `check_T_nu_ordering` | Theorem | T_nu_ordering: Normal Neutrino Mass Ordering [P]. |
+| `check_L_dm2_hierarchy` | Lemma | L_dm2_hierarchy: Neutrino Mass-Squared Splitting Ratio [P]. |
+| `check_L_mbb_prediction` | Lemma | L_mbb_prediction: Neutrinoless Double Beta Decay Effective Mass [P]. |
+| `check_L_DUNE_response` | Lemma | L_DUNE_response: APF δ_PMNS Prediction vs DUNE/Hyper-K Sensitivity [P]. |
+| `check_L_cosmological_constant` | Lemma |  |
 
 All check functions reside in `apf/core.py`. Every function listed above can be called independently and returns a structured result including its logical dependencies and the mathematical content it verifies.
 
@@ -69,7 +109,7 @@ All check functions reside in `apf/core.py`. Every function listed above can be 
 ## The derivation chain
 
 ```
-(no theorems in this subset)
+  Level 0: name · Regime_R · Theorem_R · L_gauge_template_uniqueness · L_count · L_nc · T_M · L_area_scaling · Regime_exit_Type_IV · T4F · T7 · T_BH_information · L_BH_page_curve_capacity · T_gauge · L_anomaly_free · L_Witten_parity · T_field · L_saturation_partition · T_capacity_ladder · L_FN_ladder_uniqueness · T25a · T25b · T27d · T23 · T_sin2theta · L_capacity_per_dimension · L_Yukawa_bilinear · T_mass_ratios · L_mass_from_capacity · L_c_FN_gap · T_CKM · L_gen_path · L_CP_channel · T_PMNS · T_PMNS_CP · T_nu_ordering · L_dm2_hierarchy · L_mbb_prediction · L_DUNE_response · L_cosmological_constant
 ```
 
 The [interactive DAG](https://ethan-brooke.github.io/APF-Paper-4-Admissibility-Constraints-Field-Content/) shows the full graph with hover details and animated verification.
@@ -97,7 +137,7 @@ The [interactive DAG](https://ethan-brooke.github.io/APF-Paper-4-Admissibility-C
 │   ├── derivation_graph.json              ← theorem DAG as JSON
 │   └── wiki/                              ← bundled APF wiki (concepts, papers, codebase)
 ├── apf/
-│   ├── core.py                            ← 0 theorem check functions
+│   ├── core.py                            ← 40 theorem check functions
 │   ├── apf_utils.py                       ← exact arithmetic + helpers
 │   └── bank.py                            ← registry and runner
 ├── docs/
@@ -106,7 +146,8 @@ The [interactive DAG](https://ethan-brooke.github.io/APF-Paper-4-Admissibility-C
 ├── run_checks.py                          ← convenience entry point
 ├── pyproject.toml                         ← package metadata
 ├── zenodo.json                            ← archival metadata
-├── Paper_4_Admissibility_Constraints_Field_Content_vPDFonly.pdf                ← the paper
+├── Paper_4_Admissibility_Constraints_Field_Content_v2.0.tex                ← the paper
+├── Paper_4_Admissibility_Constraints_Field_Content_Supplement_v1.0.tex                ← Technical Supplement
 
 └── LICENSE                                ← MIT
 ```

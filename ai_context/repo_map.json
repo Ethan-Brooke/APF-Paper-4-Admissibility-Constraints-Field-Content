@@ -1,10 +1,10 @@
 {
   "schema": "apf.repo_map.v1",
-  "generated_at": "2026-04-19T15:42:43.352038+00:00",
+  "generated_at": "2026-04-19T17:25:48.281474+00:00",
   "paper": {
     "number": 4,
     "title": "Admissibility Constraints and Structural Saturation",
-    "current_version": "PDF only (source-pending)",
+    "current_version": "v2.0",
     "zenodo_doi": "10.5281/zenodo.18604845",
     "zenodo_url": "https://doi.org/10.5281/zenodo.18604845",
     "github_slug": "APF-Paper-4-Admissibility-Constraints-Field-Content",
@@ -59,7 +59,7 @@
     {
       "number": 4,
       "title": "Admissibility Constraints and Structural Saturation",
-      "current_version": "PDF only (source-pending)",
+      "current_version": "v2.0",
       "zenodo_doi": "10.5281/zenodo.18604845",
       "zenodo_url": "https://doi.org/10.5281/zenodo.18604845",
       "github_slug": "APF-Paper-4-Admissibility-Constraints-Field-Content",
@@ -70,7 +70,7 @@
     {
       "number": 5,
       "title": "Quantum Structure from Finite Enforceability",
-      "current_version": "v1.0",
+      "current_version": "v2.0-PLEC",
       "zenodo_doi": "10.5281/zenodo.18604861",
       "zenodo_url": "https://doi.org/10.5281/zenodo.18604861",
       "github_slug": "APF-Paper-5-Quantum-Structure-Hilbert-Born",
@@ -81,7 +81,7 @@
     {
       "number": 6,
       "title": "Dynamics and Geometry as Optimal Admissible Reallocation",
-      "current_version": "v1.0",
+      "current_version": "v2.0-PLEC",
       "zenodo_doi": "10.5281/zenodo.18604874",
       "zenodo_url": "https://doi.org/10.5281/zenodo.18604874",
       "github_slug": "APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity",
@@ -127,7 +127,7 @@
     "ai": "START_HERE.md",
     "human": "README.md",
     "verification": "run_checks.py",
-    "manuscript": "Paper_4_Admissibility_Constraints_Field_Content_vPDFonly.pdf"
+    "manuscript": "Paper_4_Admissibility_Constraints_Field_Content_v2.0.pdf"
   },
   "read_order_for_ai": [
     {
@@ -413,12 +413,37 @@
       "tier": "code",
       "references": []
     },
-    "Paper_4_Admissibility_Constraints_Field_Content_vPDFonly.pdf": {
+    "Paper_4_Admissibility_Constraints_Field_Content_Supplement_v1.0.pdf": {
+      "purpose": "Technical Supplement compiled PDF (canonical truth for formal content)",
+      "audience": "human",
+      "read_order": null,
+      "tier": "manuscript",
+      "references": []
+    },
+    "Paper_4_Admissibility_Constraints_Field_Content_Supplement_v1.0.tex": {
+      "purpose": "Technical Supplement LaTeX source (canonical truth for formal content)",
+      "audience": "human",
+      "read_order": null,
+      "tier": "manuscript",
+      "references": [
+        "apf/core.py"
+      ]
+    },
+    "Paper_4_Admissibility_Constraints_Field_Content_v2.0.pdf": {
       "purpose": "Main paper compiled PDF (Paper 4)",
       "audience": "human",
       "read_order": null,
       "tier": "manuscript",
       "references": []
+    },
+    "Paper_4_Admissibility_Constraints_Field_Content_v2.0.tex": {
+      "purpose": "Main paper LaTeX source (Paper 4 v2.0)",
+      "audience": "human",
+      "read_order": null,
+      "tier": "manuscript",
+      "references": [
+        "apf/core.py"
+      ]
     },
     "ai_context/wiki/Index.md": {
       "purpose": "Bundled wiki entry point: navigation map across concepts/papers/codebase pages",
@@ -601,6 +626,41 @@
       "read_order": null,
       "tier": "context",
       "references": []
+    },
+    "derivation_graph.json": {
+      "purpose": "(uncategorized; see file directly)",
+      "audience": "unknown",
+      "read_order": null,
+      "tier": "other",
+      "references": []
+    },
+    "interactive_dag.html": {
+      "purpose": "(uncategorized; see file directly)",
+      "audience": "unknown",
+      "read_order": null,
+      "tier": "other",
+      "references": []
+    },
+    "Paper_4_Admissibility_Constraints_Field_Content_vPDFonly.pdf": {
+      "purpose": "(uncategorized; see file directly)",
+      "audience": "unknown",
+      "read_order": null,
+      "tier": "other",
+      "references": []
+    },
+    "repo_map.json": {
+      "purpose": "(uncategorized; see file directly)",
+      "audience": "unknown",
+      "read_order": null,
+      "tier": "other",
+      "references": []
+    },
+    "theorems.json": {
+      "purpose": "(uncategorized; see file directly)",
+      "audience": "unknown",
+      "read_order": null,
+      "tier": "other",
+      "references": []
     }
   },
   "edges": [
@@ -758,12 +818,22 @@
       "from": "docs/index.html",
       "to": "ai_context/derivation_graph.json",
       "kind": "references"
+    },
+    {
+      "from": "Paper_4_Admissibility_Constraints_Field_Content_Supplement_v1.0.tex",
+      "to": "apf/core.py",
+      "kind": "references"
+    },
+    {
+      "from": "Paper_4_Admissibility_Constraints_Field_Content_v2.0.tex",
+      "to": "apf/core.py",
+      "kind": "references"
     }
   ],
   "metadata": {
-    "total_files": 54,
-    "total_edges": 31,
-    "bundled_checks": 0,
+    "total_files": 62,
+    "total_edges": 33,
+    "bundled_checks": 40,
     "corpus_size": 10
   }
 }

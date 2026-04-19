@@ -3,15 +3,214 @@
 This guide is the physics-first walkthrough for peer reviewers of Admissibility Constraints and Structural Saturation. It addresses the structural assumptions, anticipated objections, and falsification surfaces of the paper's argument. The intended audience is a peer reviewer with a background in physics or mathematics.
 
 The guide complements three other verification routes:
-- The [executable codebase](apf/) (run `python run_checks.py` for the full 0-theorem verification);
+- The [executable codebase](apf/) (run `python run_checks.py` for the full 40-theorem verification);
 - The [Colab notebook](APF_Reviewer_Walkthrough.ipynb) (zero-install, theorem-by-theorem cells with prose + code);
 - The [interactive derivation DAG](https://ethan-brooke.github.io/Admissibility-Constraints-Field-Content/) (hover-for-details, click-for-dependencies, animated verification).
 
 ---
 
-## The derivation in 0 steps
+## The derivation in 40 steps
 
 The full chain from the foundational commitments to this paper's results:
+
+**Step 1 — name** (`name`)
+
+  
+
+
+**Step 2 — Regime_R** (`check_Regime_R`)
+
+  Regime_R: PLEC Well-Posedness under R1..R4 [P].
+
+
+**Step 3 — Theorem_R** (`check_Theorem_R`)
+
+  Theorem_R: Representation Requirements from Admissibility.
+
+
+**Step 4 — L_gauge_template_uniqueness** (`check_L_gauge_template_uniqueness`)
+
+  L_gauge_template_uniqueness: SU(N_c)×SU(2)×U(1) is the Unique Gauge Template.
+
+
+**Step 5 — L_count** (`check_L_count`)
+
+  L_count: Capacity Counting ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â 1 structural enforcement channel = 1 unit.
+
+
+**Step 6 — L_nc** (`check_L_nc`)
+
+  L_nc: Non-Closure from Admissibility Physics + Locality.
+
+
+**Step 7 — T_M** (`check_T_M`)
+
+  T_M: Interface Monogamy.
+
+
+**Step 8 — L_area_scaling** (`check_L_area_scaling`)
+
+  
+
+
+**Step 9 — Regime_exit_Type_IV** (`check_Regime_exit_Type_IV`)
+
+  Regime_exit_Type_IV: Loss of Smooth or Local Structure [P].
+
+
+**Step 10 — T4F** (`check_T4F`)
+
+  T4F: Flavor-Capacity Saturation.
+
+
+**Step 11 — T7** (`check_T7`)
+
+  T7: Generation Bound N_gen = 3 [P].
+
+
+**Step 12 — T_BH_information** (`check_T_BH_information`)
+
+  T_BH_information: Black Hole Information Preservation [P].
+
+
+**Step 13 — L_BH_page_curve_capacity** (`check_L_BH_page_curve_capacity`)
+
+  L_BH_page_curve_capacity: Page Curve from Capacity Counting [P].
+
+
+**Step 14 — T_gauge** (`check_T_gauge`)
+
+  T_gauge: SU(3)*SU(2)*U(1) from Capacity Budget.
+
+
+**Step 15 — L_anomaly_free** (`check_L_anomaly_free`)
+
+  L_anomaly_free: Gauge Anomaly Cancellation Cross-Check [P].
+
+
+**Step 16 — L_Witten_parity** (`check_L_Witten_parity`)
+
+  
+
+
+**Step 17 — T_field** (`check_T_field`)
+
+  T_field: SM Fermion Content -- Exhaustive Derivation.
+
+
+**Step 18 — L_saturation_partition** (`check_L_saturation_partition`)
+
+  L_saturation_partition: Type-Count Partition is Saturation-Independent [P].
+
+
+**Step 19 — T_capacity_ladder** (`check_T_capacity_ladder`)
+
+  T_capacity_ladder: Capacity Charges from Budget [P].
+
+
+**Step 20 — L_FN_ladder_uniqueness** (`check_L_FN_ladder_uniqueness`)
+
+  L_FN_ladder_uniqueness: q_B = (7,4,0) is Unique Cost-Minimal Partition [P].
+
+
+**Step 21 — T25a** (`check_T25a`)
+
+  T25a: Overlap Bounds from Interface Monogamy.
+
+
+**Step 22 — T25b** (`check_T25b`)
+
+  T25b: Overlap Bound from Saturation.
+
+
+**Step 23 — T27d** (`check_T27d`)
+
+  T27d: gamma_2/gamma_1 = d + 1/d from Representation Principles.
+
+
+**Step 24 — T23** (`check_T23`)
+
+  T23: Fixed-Point Formula for sin^2theta_W.
+
+
+**Step 25 — T_sin2theta** (`check_T_sin2theta`)
+
+  T_sin2theta: Weinberg Angle -- structurally derived from fixed point.
+
+
+**Step 26 — L_capacity_per_dimension** (`check_L_capacity_per_dimension`)
+
+  L_capacity_per_dimension: Neutrino d_1 = x^(q_B1/d_Y) [P].
+
+
+**Step 27 — L_Yukawa_bilinear** (`check_L_Yukawa_bilinear`)
+
+  L_Yukawa_bilinear: Yukawa Coupling Is Bilinear in Generation Amplitudes [P].
+
+
+**Step 28 — T_mass_ratios** (`check_T_mass_ratios`)
+
+  T_mass_ratios: Six Charged Fermion Mass Ratios from Zero Parameters [P].
+
+
+**Step 29 — L_mass_from_capacity** (`check_L_mass_from_capacity`)
+
+  L_mass_from_capacity: Complete Mass Matrix Derivation — Zero FN Imports [P].
+
+
+**Step 30 — L_c_FN_gap** (`check_L_c_FN_gap`)
+
+  L_c_FN_gap: NNLO Coefficient c = x^Δq from FN Charge Gap [P].
+
+
+**Step 31 — T_CKM** (`check_T_CKM`)
+
+  T_CKM: Zero-Parameter CKM Matrix Prediction [P].
+
+
+**Step 32 — L_gen_path** (`check_L_gen_path`)
+
+  L_gen_path: Generation Graph Is a Path [P].
+
+
+**Step 33 — L_CP_channel** (`check_L_CP_channel`)
+
+  L_CP_channel: Channel Asymmetry Enables CP Violation [P | L_H_curv, T_q_Higgs].
+
+
+**Step 34 — T_PMNS** (`check_T_PMNS`)
+
+  T_PMNS: Zero-Parameter PMNS Neutrino Mixing Matrix [P].
+
+
+**Step 35 — T_PMNS_CP** (`check_T_PMNS_CP`)
+
+  T_PMNS_CP: Leptonic CP Violation Vanishes Exactly [P].
+
+
+**Step 36 — T_nu_ordering** (`check_T_nu_ordering`)
+
+  T_nu_ordering: Normal Neutrino Mass Ordering [P].
+
+
+**Step 37 — L_dm2_hierarchy** (`check_L_dm2_hierarchy`)
+
+  L_dm2_hierarchy: Neutrino Mass-Squared Splitting Ratio [P].
+
+
+**Step 38 — L_mbb_prediction** (`check_L_mbb_prediction`)
+
+  L_mbb_prediction: Neutrinoless Double Beta Decay Effective Mass [P].
+
+
+**Step 39 — L_DUNE_response** (`check_L_DUNE_response`)
+
+  L_DUNE_response: APF δ_PMNS Prediction vs DUNE/Hyper-K Sensitivity [P].
+
+
+**Step 40 — L_cosmological_constant** (`check_L_cosmological_constant`)
+
+  
 
 
 
@@ -94,7 +293,7 @@ This is a structured threat model. If any of the surfaces fails empirically, the
 
 The codebase has three files in `apf/`:
 
-- **`apf/core.py`** — the 0 theorem check functions for this paper. Each function constructs a mathematical witness, verifies the theorem's claim, and returns a structured result with name, dependencies, status, and key result.
+- **`apf/core.py`** — the 40 theorem check functions for this paper. Each function constructs a mathematical witness, verifies the theorem's claim, and returns a structured result with name, dependencies, status, and key result.
 - **`apf/apf_utils.py`** — exact arithmetic utilities (mostly `Fraction`-based; numpy/scipy where required by specific numerical lemmas).
 - **`apf/bank.py`** — registry of all check functions in this repo, plus the `run_all()` runner.
 

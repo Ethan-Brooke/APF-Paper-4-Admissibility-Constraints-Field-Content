@@ -100,7 +100,7 @@
   <header>
     <div>
       <h1>Paper 4 — Admissibility Constraints and Structural Saturation</h1>
-      <div class="subtitle">Interactive derivation DAG · 0 checks · APF v6.8</div>
+      <div class="subtitle">Interactive derivation DAG · 40 checks · APF v6.8</div>
     </div>
     <div class="controls">
       <button id="run-checks-btn">▶ Run All Checks</button>
@@ -130,7 +130,288 @@
   </footer>
 
 <script>
-const NODES = [];
+const NODES = [
+  {
+    "id": "name",
+    "fullId": "name",
+    "type": "other",
+    "summary": "",
+    "deps": []
+  },
+  {
+    "id": "Regime_R",
+    "fullId": "check_Regime_R",
+    "type": "other",
+    "summary": "Regime_R: PLEC Well-Posedness under R1..R4 [P].",
+    "deps": []
+  },
+  {
+    "id": "Theorem_R",
+    "fullId": "check_Theorem_R",
+    "type": "other",
+    "summary": "Theorem_R: Representation Requirements from Admissibility.",
+    "deps": []
+  },
+  {
+    "id": "L_gauge_template_uniqueness",
+    "fullId": "check_L_gauge_template_uniqueness",
+    "type": "lemma",
+    "summary": "L_gauge_template_uniqueness: SU(N_c)\u00d7SU(2)\u00d7U(1) is the Unique Gauge Template.",
+    "deps": []
+  },
+  {
+    "id": "L_count",
+    "fullId": "check_L_count",
+    "type": "lemma",
+    "summary": "L_count: Capacity Counting \u00c3\u0192\u00c6\u2019\u00c3\u201a\u00c2\u00a2\u00c3\u0192\u00c2\u00a2\u00c3\u00a2\u00e2\u201a\u00ac\u00c5\u00a1\u00c3\u201a\u00c2\u00ac\u00c3\u0192\u00c2\u00a2\u00c3\u00a2\u00e2\u20ac\u0161\u00c2\u00ac\u00c3\u201a\u00c2\u009d 1 structural enforcement channel = 1 unit.",
+    "deps": []
+  },
+  {
+    "id": "L_nc",
+    "fullId": "check_L_nc",
+    "type": "lemma",
+    "summary": "L_nc: Non-Closure from Admissibility Physics + Locality.",
+    "deps": []
+  },
+  {
+    "id": "T_M",
+    "fullId": "check_T_M",
+    "type": "theorem",
+    "summary": "T_M: Interface Monogamy.",
+    "deps": []
+  },
+  {
+    "id": "L_area_scaling",
+    "fullId": "check_L_area_scaling",
+    "type": "lemma",
+    "summary": "",
+    "deps": []
+  },
+  {
+    "id": "Regime_exit_Type_IV",
+    "fullId": "check_Regime_exit_Type_IV",
+    "type": "other",
+    "summary": "Regime_exit_Type_IV: Loss of Smooth or Local Structure [P].",
+    "deps": []
+  },
+  {
+    "id": "T4F",
+    "fullId": "check_T4F",
+    "type": "theorem",
+    "summary": "T4F: Flavor-Capacity Saturation.",
+    "deps": []
+  },
+  {
+    "id": "T7",
+    "fullId": "check_T7",
+    "type": "theorem",
+    "summary": "T7: Generation Bound N_gen = 3 [P].",
+    "deps": []
+  },
+  {
+    "id": "T_BH_information",
+    "fullId": "check_T_BH_information",
+    "type": "theorem",
+    "summary": "T_BH_information: Black Hole Information Preservation [P].",
+    "deps": []
+  },
+  {
+    "id": "L_BH_page_curve_capacity",
+    "fullId": "check_L_BH_page_curve_capacity",
+    "type": "lemma",
+    "summary": "L_BH_page_curve_capacity: Page Curve from Capacity Counting [P].",
+    "deps": []
+  },
+  {
+    "id": "T_gauge",
+    "fullId": "check_T_gauge",
+    "type": "theorem",
+    "summary": "T_gauge: SU(3)*SU(2)*U(1) from Capacity Budget.",
+    "deps": []
+  },
+  {
+    "id": "L_anomaly_free",
+    "fullId": "check_L_anomaly_free",
+    "type": "lemma",
+    "summary": "L_anomaly_free: Gauge Anomaly Cancellation Cross-Check [P].",
+    "deps": []
+  },
+  {
+    "id": "L_Witten_parity",
+    "fullId": "check_L_Witten_parity",
+    "type": "lemma",
+    "summary": "",
+    "deps": []
+  },
+  {
+    "id": "T_field",
+    "fullId": "check_T_field",
+    "type": "theorem",
+    "summary": "T_field: SM Fermion Content -- Exhaustive Derivation.",
+    "deps": []
+  },
+  {
+    "id": "L_saturation_partition",
+    "fullId": "check_L_saturation_partition",
+    "type": "lemma",
+    "summary": "L_saturation_partition: Type-Count Partition is Saturation-Independent [P].",
+    "deps": []
+  },
+  {
+    "id": "T_capacity_ladder",
+    "fullId": "check_T_capacity_ladder",
+    "type": "theorem",
+    "summary": "T_capacity_ladder: Capacity Charges from Budget [P].",
+    "deps": []
+  },
+  {
+    "id": "L_FN_ladder_uniqueness",
+    "fullId": "check_L_FN_ladder_uniqueness",
+    "type": "lemma",
+    "summary": "L_FN_ladder_uniqueness: q_B = (7,4,0) is Unique Cost-Minimal Partition [P].",
+    "deps": []
+  },
+  {
+    "id": "T25a",
+    "fullId": "check_T25a",
+    "type": "theorem",
+    "summary": "T25a: Overlap Bounds from Interface Monogamy.",
+    "deps": []
+  },
+  {
+    "id": "T25b",
+    "fullId": "check_T25b",
+    "type": "theorem",
+    "summary": "T25b: Overlap Bound from Saturation.",
+    "deps": []
+  },
+  {
+    "id": "T27d",
+    "fullId": "check_T27d",
+    "type": "theorem",
+    "summary": "T27d: gamma_2/gamma_1 = d + 1/d from Representation Principles.",
+    "deps": []
+  },
+  {
+    "id": "T23",
+    "fullId": "check_T23",
+    "type": "theorem",
+    "summary": "T23: Fixed-Point Formula for sin^2theta_W.",
+    "deps": []
+  },
+  {
+    "id": "T_sin2theta",
+    "fullId": "check_T_sin2theta",
+    "type": "theorem",
+    "summary": "T_sin2theta: Weinberg Angle -- structurally derived from fixed point.",
+    "deps": []
+  },
+  {
+    "id": "L_capacity_per_dimension",
+    "fullId": "check_L_capacity_per_dimension",
+    "type": "lemma",
+    "summary": "L_capacity_per_dimension: Neutrino d_1 = x^(q_B1/d_Y) [P].",
+    "deps": []
+  },
+  {
+    "id": "L_Yukawa_bilinear",
+    "fullId": "check_L_Yukawa_bilinear",
+    "type": "lemma",
+    "summary": "L_Yukawa_bilinear: Yukawa Coupling Is Bilinear in Generation Amplitudes [P].",
+    "deps": []
+  },
+  {
+    "id": "T_mass_ratios",
+    "fullId": "check_T_mass_ratios",
+    "type": "theorem",
+    "summary": "T_mass_ratios: Six Charged Fermion Mass Ratios from Zero Parameters [P].",
+    "deps": []
+  },
+  {
+    "id": "L_mass_from_capacity",
+    "fullId": "check_L_mass_from_capacity",
+    "type": "lemma",
+    "summary": "L_mass_from_capacity: Complete Mass Matrix Derivation \u2014 Zero FN Imports [P].",
+    "deps": []
+  },
+  {
+    "id": "L_c_FN_gap",
+    "fullId": "check_L_c_FN_gap",
+    "type": "lemma",
+    "summary": "L_c_FN_gap: NNLO Coefficient c = x^\u0394q from FN Charge Gap [P].",
+    "deps": []
+  },
+  {
+    "id": "T_CKM",
+    "fullId": "check_T_CKM",
+    "type": "theorem",
+    "summary": "T_CKM: Zero-Parameter CKM Matrix Prediction [P].",
+    "deps": []
+  },
+  {
+    "id": "L_gen_path",
+    "fullId": "check_L_gen_path",
+    "type": "lemma",
+    "summary": "L_gen_path: Generation Graph Is a Path [P].",
+    "deps": []
+  },
+  {
+    "id": "L_CP_channel",
+    "fullId": "check_L_CP_channel",
+    "type": "lemma",
+    "summary": "L_CP_channel: Channel Asymmetry Enables CP Violation [P | L_H_curv, T_q_Higgs].",
+    "deps": []
+  },
+  {
+    "id": "T_PMNS",
+    "fullId": "check_T_PMNS",
+    "type": "theorem",
+    "summary": "T_PMNS: Zero-Parameter PMNS Neutrino Mixing Matrix [P].",
+    "deps": []
+  },
+  {
+    "id": "T_PMNS_CP",
+    "fullId": "check_T_PMNS_CP",
+    "type": "theorem",
+    "summary": "T_PMNS_CP: Leptonic CP Violation Vanishes Exactly [P].",
+    "deps": []
+  },
+  {
+    "id": "T_nu_ordering",
+    "fullId": "check_T_nu_ordering",
+    "type": "theorem",
+    "summary": "T_nu_ordering: Normal Neutrino Mass Ordering [P].",
+    "deps": []
+  },
+  {
+    "id": "L_dm2_hierarchy",
+    "fullId": "check_L_dm2_hierarchy",
+    "type": "lemma",
+    "summary": "L_dm2_hierarchy: Neutrino Mass-Squared Splitting Ratio [P].",
+    "deps": []
+  },
+  {
+    "id": "L_mbb_prediction",
+    "fullId": "check_L_mbb_prediction",
+    "type": "lemma",
+    "summary": "L_mbb_prediction: Neutrinoless Double Beta Decay Effective Mass [P].",
+    "deps": []
+  },
+  {
+    "id": "L_DUNE_response",
+    "fullId": "check_L_DUNE_response",
+    "type": "lemma",
+    "summary": "L_DUNE_response: APF \u03b4_PMNS Prediction vs DUNE/Hyper-K Sensitivity [P].",
+    "deps": []
+  },
+  {
+    "id": "L_cosmological_constant",
+    "fullId": "check_L_cosmological_constant",
+    "type": "lemma",
+    "summary": "",
+    "deps": []
+  }
+];
 const LINKS = [];
 const COLOR = {
   axiom: getCss('--axiom'), theorem: getCss('--theorem'),

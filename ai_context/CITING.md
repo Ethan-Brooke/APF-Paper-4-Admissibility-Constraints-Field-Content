@@ -8,7 +8,7 @@ This release is one paper of a multi-paper series. There are three citation targ
 
 **APA-style:**
 
-> Brooke, E. S. (2026). *Admissibility Constraints and Structural Saturation*. Version PDF only (source-pending). Zenodo. https://doi.org/10.5281/zenodo.18604845
+> Brooke, E. S. (2026). *Admissibility Constraints and Structural Saturation*. Version v2.0. Zenodo. https://doi.org/10.5281/zenodo.18604845
 
 **BibTeX:**
 
@@ -17,7 +17,7 @@ This release is one paper of a multi-paper series. There are three citation targ
   author       = {Brooke, Ethan S.},
   title        = {Admissibility Constraints and Structural Saturation},
   year         = {2026},
-  version      = {PDF only (source-pending)},
+  version      = {v2.0},
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.18604845},
   url          = {https://doi.org/10.5281/zenodo.18604845}

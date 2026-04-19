@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "apf-paper4"
-version = "PDF only (source-pending)"
+version = "2.0"
 description = "Admissibility Constraints Field Content — executable mathematical appendix"
 readme = "README.md"
 license = {text = "MIT"}

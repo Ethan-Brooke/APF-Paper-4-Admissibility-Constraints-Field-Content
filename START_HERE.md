@@ -20,14 +20,14 @@ This file is structured in three tiers. **Tier 1** (§0 below) is the 60-second 
 
 **What this paper contributes.** Field content and fermion spectrum of the Standard Model: 45 fermions in three generations, the 1-of-4680 admissible template, mass-ratio structure, Cabibbo angle, CKM matrix structure. Currently PDF-only; .tex source pending.
 
-**What this repo verifies vs what it imports.** This repo locally verifies 0 theorem checks drawn from Paper 4's own dependency subset. Results from Papers 1 and 2 are imported, not re-derived here. The full APF corpus (and which paper owns which result) is in §1 below.
+**What this repo verifies vs what it imports.** This repo locally verifies 40 theorem checks drawn from Paper 4's own dependency subset. Results from Papers 1 and 2 are imported, not re-derived here. The full APF corpus (and which paper owns which result) is in §1 below.
 
 **Scope — after reading only this repo:**
 
-- **You may:** summarize Paper 4's argument and results; explain the local 0-theorem subset; run all bundled checks to verify them; cite the paper by its DOI.
+- **You may:** summarize Paper 4's argument and results; explain the local 40-theorem subset; run all bundled checks to verify them; cite the paper by its DOI.
 - **You may not:** claim mastery of the full APF corpus on the basis of this repo alone; re-derive results that belong to other papers using only material here; present imported results as locally derived in this repo; treat the bundled check subset as the whole engine (the canonical bank is 342 theorems / 355 checks; this repo contains a subset).
 
-**Canonical state (one source of truth).** Codebase **v6.9**, frozen 2026-04-18. Full engine: **355** verify_all checks, **342** bank-registered theorems, **48** quantitative predictions. This repo bundles 0 of those checks for Paper 4's dependency subset. If you see a different count anywhere, this line is canonical.
+**Canonical state (one source of truth).** Codebase **v6.9**, frozen 2026-04-18. Full engine: **355** verify_all checks, **342** bank-registered theorems, **48** quantitative predictions. This repo bundles 40 of those checks for Paper 4's dependency subset. If you see a different count anywhere, this line is canonical.
 
 ---
 
@@ -105,7 +105,7 @@ Skim, don't memorize. Must know by sight:
 
 ### Step 5 — Load the theorem catalog (`ai_context/theorems.json`)
 
-Not mandatory to read end-to-end, but make sure you know it exists and how to query it. The full bank has 342 entries; this paper bundles **0 of 342** for local execution. Each entry has name, module, epistemic tag, dependencies, and one-line summary.
+Not mandatory to read end-to-end, but make sure you know it exists and how to query it. The full bank has 342 entries; this paper bundles **40 of 342** for local execution. Each entry has name, module, epistemic tag, dependencies, and one-line summary.
 
 Querying examples (use when you need to cite a specific theorem):
 
@@ -228,8 +228,8 @@ You don't need to read all of these upfront. This is the "what's in the toolbox"
 
 Only after completing steps 1–7:
 
-- **`Paper_4__PDF only (source-pending).pdf`** — the manuscript. Read §1 (Introduction) and whichever section is relevant to your task. Don't try to read the whole paper before starting work.
-- **`Paper_4__Supplement_*.pdf`** (if present) — the Technical Supplement. Canonical proofs. Dense; dip in only where you need depth.
+- **`Paper_4_Admissibility_Constraints_Field_Content_v2.0.pdf`** — the manuscript. Read §1 (Introduction) and whichever section is relevant to your task. Don't try to read the whole paper before starting work.
+- **`Paper_4_Admissibility_Constraints_Field_Content_Supplement_*.pdf`** (if present) — the Technical Supplement. Canonical proofs. Dense; dip in only where you need depth.
 
 The `.tex` sources are also included if you need to propose edits.
 
