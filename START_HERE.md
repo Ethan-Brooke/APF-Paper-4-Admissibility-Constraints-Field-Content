@@ -18,16 +18,16 @@ This file is structured in three tiers. **Tier 1** (§0 below) is the 60-second 
 
 **What APF is.** APF is a single-axiom framework. The only axiom is that enforcement (the cost of maintaining physical distinction) is finite (Axiom A1). From A1 and its four-component structure (PLEC), 342 theorems derive the Standard Model gauge group SU(3)xSU(2)xU(1), 45 fermions, three generations, and 48 quantitative predictions with zero free parameters. Each paper contributes one layer: Paper 0 states the ontology; Papers 1-7 build the derivation chain; Paper 13 is the master reference. The codebase (v6.9) is the authoritative specification; the papers are prose guides to reading the code.
 
-**What this paper contributes.** Field content and fermion spectrum of the Standard Model: 45 fermions in three generations, the 1-of-4680 admissible template, mass-ratio structure, Cabibbo angle, CKM matrix structure. Currently PDF-only; .tex source pending.
+**What this paper contributes.** Full SM gauge structure (gauge template uniqueness, N_c=3), 45-fermion field content (1-of-4680 admissible template), three generations, and all mass/mixing/CP-violation parameters derived from finite enforcement capacity C_total=61 with zero free parameters. Includes sin^2 theta_W = 3/13 via gate S_0 synthesis, Schur mass chain, Cabibbo, CKM + CP, PMNS, dark sector as C_ext, and the cosmological constant as capacity residual. Version 2.0 main paper (39pp) + Technical Supplement v1.0 (19pp, 2026-04-19 rebuild from Feb 2026 PDF-only).
 
-**What this repo verifies vs what it imports.** This repo locally verifies 40 theorem checks drawn from Paper 4's own dependency subset. Results from Papers 1 and 2 are imported, not re-derived here. The full APF corpus (and which paper owns which result) is in §1 below.
+**What this repo verifies vs what it imports.** This repo locally verifies 35 theorem checks drawn from Paper 4's own dependency subset. Results from Papers 1 and 2 are imported, not re-derived here. The full APF corpus (and which paper owns which result) is in §1 below.
 
 **Scope — after reading only this repo:**
 
-- **You may:** summarize Paper 4's argument and results; explain the local 40-theorem subset; run all bundled checks to verify them; cite the paper by its DOI.
+- **You may:** summarize Paper 4's argument and results; explain the local 35-theorem subset; run all bundled checks to verify them; cite the paper by its DOI.
 - **You may not:** claim mastery of the full APF corpus on the basis of this repo alone; re-derive results that belong to other papers using only material here; present imported results as locally derived in this repo; treat the bundled check subset as the whole engine (the canonical bank is 342 theorems / 355 checks; this repo contains a subset).
 
-**Canonical state (one source of truth).** Codebase **v6.9**, frozen 2026-04-18. Full engine: **355** verify_all checks, **342** bank-registered theorems, **48** quantitative predictions. This repo bundles 40 of those checks for Paper 4's dependency subset. If you see a different count anywhere, this line is canonical.
+**Canonical state (one source of truth).** Codebase **v6.9**, frozen 2026-04-18. Full engine: **355** verify_all checks, **342** bank-registered theorems, **48** quantitative predictions. This repo bundles 35 of those checks for Paper 4's dependency subset. If you see a different count anywhere, this line is canonical.
 
 ---
 
@@ -53,6 +53,19 @@ You are reading the companion to **Paper 4** (this repo: https://github.com/Etha
 **When in doubt about scope:** if the question is about a result outside Paper 4, point the user (or yourself) to the relevant paper above. Do not try to derive it from the bundled subset; the canonical state is the codebase, not this slice.
 
 **Machine-readable equivalent.** For programmatic use, [`ai_context/repo_map.json`](ai_context/repo_map.json), [`ai_context/theorems.json`](ai_context/theorems.json), and [`ai_context/derivation_graph.json`](ai_context/derivation_graph.json) are the primary machine interfaces — they encode the same corpus inventory, full theorem catalog, and dependency DAG in structured form. For AI agents, those three JSON files are often more useful than the prose of this file. Root-level copies are also present at the repo root for discoverability.
+
+---
+
+## §1.5 — The Phase 21 audit-native bundle (Tier 1)
+
+As of 2026-04-24, this repo ships a dedicated bundle of AI-onboarding files designed specifically to prevent the failure modes listed in `AGENTS.md`. If you are a cold AI agent, read these four files **before** attempting to summarise, criticise, or extend this paper. Each has a single clear purpose.
+
+1. **`ai_context/ARGUMENT_FLOW.md`** — one-page structural spine. A → B → C → D → E. If you read only one file in `ai_context/`, read this one.
+2. **`ai_context/LOCAL_VS_IMPORTED.md`** — five-category partition of every structurally meaningful result into *locally proved / imported from earlier APF / standard mathematical / empirical comparison / not claimed*. Prevents the most common AI failure mode (presenting imported APF-spine results as locally derived).
+3. **`ai_context/CLAIMS_LEDGER.md`** — row-by-row attack surface: every load-bearing claim maps to proof location, code check, status tag, and the specific failure mode a skeptical reviewer would attack.
+4. **`ai_context/DO_NOT_CLAIM.md`** — anti-hallucination guards harvested from external reviews + internal audits. Consult before writing any summary, email, or reviewer response.
+
+These files are the Phase 21 (AI-Onboarding Audit) output from the canonical APF work plan. Paper 8 carries the pilot implementation with additional Phase 22 content (acc_SM provenance fix, anti-smuggling test suite, minimal working example, gorgeous-math Colab).
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "title": "APF Paper 4 — Admissibility Constraints and Structural Saturation",
-  "description": "<p>Field content and fermion spectrum of the Standard Model: 45 fermions in three generations, the 1-of-4680 admissible template, mass-ratio structure, Cabibbo angle, CKM matrix structure. Currently PDF-only; .tex source pending.</p><p>This repository is the executable mathematical appendix for Paper 4 of the Admissibility Physics Framework (APF). All theorems trace to named check functions in the bundled <code>apf/</code> package.</p>",
+  "description": "<p>Full SM gauge structure, 45-fermion field content, three generations, and all mass/mixing/CP-violation parameters derived from finite enforcement capacity with zero free parameters. Includes T_M interface monogamy, T_4F three-generations, gauge template uniqueness (SU(3)*SU(2)*U(1), N_c=3), the 1-of-4680 fermion filter, capacity partition C_total=61=45+4+12, sin^2 theta_W=3/13 via gate S_0 synthesis, Schur mass chain, Cabibbo sin theta_C=e^{-3/2}, CKM + CP violation, PMNS structure, dark sector as C_ext, Lambda = capacity residual.</p><p>Version 2.0 (2026-04-19) is a full-scope rebuild from the February 2026 PDF-only release (9pp) into a 39-page main paper + 19-page Technical Supplement v1.0. Technical Supplement contains: assumption inventory (PLEC + Regime R + H1--H4 paper-specific hypotheses); formal proofs for T_M biconditional, T_4F with CP-coherence correction, 1-of-4680 two-phase derivation, sin^2 theta_W synthesis, FN ladder, PMNS; 6 countermodels; red-team on H1--H4; theorem index + ASCII dependency diagram; changelog. All theorems trace to named check functions in the bundled <code>apf/</code> subset (35/35 checks pass).</p>",
   "creators": [
     {
       "name": "Brooke, Ethan",
@@ -11,7 +11,19 @@
   "upload_type": "software",
   "access_right": "open",
   "license": "MIT",
-  "keywords": ["fermion spectrum", "field content", "Standard Model", "generations", "Cabibbo angle", "CKM matrix"],
+  "keywords": [
+    "Standard Model",
+    "gauge group derivation",
+    "weak mixing angle",
+    "sin^2 theta_W",
+    "CKM",
+    "PMNS",
+    "fermion mass hierarchy",
+    "three generations",
+    "dark matter",
+    "capacity partition",
+    "admissibility physics"
+  ],
   "related_identifiers": [
     {
       "identifier": "https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content",

@@ -12,7 +12,7 @@
 
 ## Why this codebase exists
 
-Field content and fermion spectrum of the Standard Model: 45 fermions in three generations, the 1-of-4680 admissible template, mass-ratio structure, Cabibbo angle, CKM matrix structure. Currently PDF-only; .tex source pending.
+Full SM gauge structure, 45-fermion field content, three generations, and all mass/mixing/CP-violation parameters derived from finite enforcement capacity C_total=61 with zero free parameters. Includes gauge template uniqueness (N_c=3), the 1-of-4680 admissible template, sin^2 theta_W = 3/13 via gate S_0, Schur mass chain, Cabibbo, CKM + CP, PMNS, dark sector as C_ext, Lambda = capacity residual. Version 2.0 (2026-04-19) is a full-scope rebuild from the February 2026 PDF-only release: 39pp main paper + 19pp Technical Supplement v1.0.
 
 This repository is the executable proof.
 
