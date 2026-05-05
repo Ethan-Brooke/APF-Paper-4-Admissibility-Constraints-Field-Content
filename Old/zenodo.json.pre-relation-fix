@@ -11,7 +11,19 @@
   "upload_type": "software",
   "access_right": "open",
   "license": "MIT",
-  "keywords": ["fermion spectrum", "Standard Model", "generations", "weak mixing angle", "1-of-4680"],
+  "keywords": [
+    "Standard Model",
+    "gauge group derivation",
+    "weak mixing angle",
+    "sin^2 theta_W",
+    "CKM",
+    "PMNS",
+    "fermion mass hierarchy",
+    "three generations",
+    "dark matter",
+    "capacity partition",
+    "admissibility physics"
+  ],
   "related_identifiers": [
     {
       "identifier": "https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content",
@@ -19,15 +31,15 @@
       "scheme": "url"
     },
     {
-      "identifier": "10.5281/zenodo.18439397",
-      "relation": "isSupplementTo",
+      "identifier": "10.5281/zenodo.18604845",
+      "relation": "isVersionOf",
       "scheme": "doi"
     },
     {
-      "identifier": "10.5281/zenodo.18529115",
+      "identifier": "10.5281/zenodo.18604548",
       "relation": "references",
       "scheme": "doi"
     }
   ],
-  "version": "2.3"
+  "version": "2.0"
 }
